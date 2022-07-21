@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+	<resultMap type="userVo" id="userResultMap">
+		<result property="userid" column="userid" javaType="String" jdbcType="VARCHAR"/>
+		<result property="name" column="Name" javaType="String" jdbcType="VARCHAR"/>
+		<result property="gender" column="gender" javaType="String" jdbcType="VARCHAR"/>
+		<result property="city" column="city" javaType="String" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<select id="selectUser" parameterType="String" resultType="userResultMap">
+			SELECT * FROM users WHERE userid =#{userid}
+	</select>
+	
+	<insert id="insertUser" parameterType="UserVo">
+			INSERT INTO users(userid, name, gender, city) 
+			VALUES(#{userid},#{name},#{gender},#{city})
+	</insert>
+	
+	<delete id="deleteUser" parameterType="String">
+			DELETE FROM users WHERE userid = #{userid}
+	</delete>
+	
+	<update id="updateUser" parameterType="userVo">
+		UPDATE users SET name = #{name}, gender = #{gender}, city = #{city} 
+		WHERE userid = #{userid}
+	</update>
+	
+	<select id="selectUserAll" resultType="userResultMap">
+			SELECT * FROM users ORDER BY userid ASC
+	</select>
+	
+
+</mapper>
